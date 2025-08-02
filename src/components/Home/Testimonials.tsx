@@ -2,34 +2,49 @@ import { motion } from "framer-motion";
 
 const Testimonials = () => {
   return (
-    <div className="bg-white py-24">
-      <div className="mb-8 px-4">
-        <h3 className="text-gray-900 text-4xl font-semibold text-center">
-          Testimonials
-        </h3>
-        <p className="text-center text-gray-600 text-sm mt-2 max-w-lg mx-auto">
-          Here are some of the testimonials from our clients who have
-          experienced{" "}
-        </p>
+    <section className="py-24 bg-white">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+            Client Stories
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 bg-clip-text bg-gradient-to-r from-primary to-primary/70">
+            What Our Clients Say
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Don't just take our word for it. Here's what our clients from around
+            the world have to say about their experience working with Digital
+            Bridge.
+          </p>
+        </motion.div>
+
+        {/* Testimonials Content */}
+        <div className="p-4 overflow-x-hidden relative">
+          <div className="flex items-center mb-4">
+            <TestimonialList list={testimonials.top} duration={125} />
+            <TestimonialList list={testimonials.top} duration={125} />
+            <TestimonialList list={testimonials.top} duration={125} />
+          </div>
+          <div className="flex items-center mb-4">
+            <TestimonialList list={testimonials.middle} duration={75} reverse />
+            <TestimonialList list={testimonials.middle} duration={75} reverse />
+            <TestimonialList list={testimonials.middle} duration={75} reverse />
+          </div>
+          <div className="flex items-center">
+            <TestimonialList list={testimonials.bottom} duration={275} />
+            <TestimonialList list={testimonials.bottom} duration={275} />
+            <TestimonialList list={testimonials.bottom} duration={275} />
+          </div>
+        </div>
       </div>
-      <div className="p-4 overflow-x-hidden relative">
-        <div className="flex items-center mb-4">
-          <TestimonialList list={testimonials.top} duration={125} />
-          <TestimonialList list={testimonials.top} duration={125} />
-          <TestimonialList list={testimonials.top} duration={125} />
-        </div>
-        <div className="flex items-center mb-4">
-          <TestimonialList list={testimonials.middle} duration={75} reverse />
-          <TestimonialList list={testimonials.middle} duration={75} reverse />
-          <TestimonialList list={testimonials.middle} duration={75} reverse />
-        </div>
-        <div className="flex items-center">
-          <TestimonialList list={testimonials.bottom} duration={275} />
-          <TestimonialList list={testimonials.bottom} duration={275} />
-          <TestimonialList list={testimonials.bottom} duration={275} />
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
