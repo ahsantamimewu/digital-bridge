@@ -48,10 +48,14 @@ const TestimonialList = ({ list, reverse = false, duration = 50 }) => {
             className="shrink-0 w-[500px] grid grid-cols-[7rem,_1fr] rounded-lg overflow-hidden relative"
           >
             <img src={t.img} className="w-full h-44 object-cover" />
-            <div className="bg-slate-800 text-slate-50 p-4">
-              <span className="block font-semibold text-lg mb-1">{t.name}</span>
-              <span className="block mb-3 text-sm font-medium">{t.title}</span>
-              <span className="block text-sm text-slate-300">{t.info}</span>
+            <div className="bg-teal-50 text-slate-900 p-4">
+              <span className="block font-semibold text-lg text-gray-700 mb-1">
+                {t.name}
+              </span>
+              <span className="block mb-3 text-sm font-medium text-gray-700">
+                {t.title}
+              </span>
+              <span className="block text-sm text-gray-700">{t.info}</span>
             </div>
             <span className="text-7xl absolute top-2 right-2 text-slate-700">
               "
