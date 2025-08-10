@@ -1,155 +1,126 @@
 "use client";
 import React from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  MotionValue,
-} from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
-export const HeroParallax = ({
-  products,
-}: {
-  products: {
-    title: string;
 
-    thumbnail: string;
-  }[];
-}) => {
-  const firstRow = products.slice(0, 5);
-  const secondRow = products.slice(5, 10);
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
-
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 600]),
-    springConfig
-  );
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -600]),
-    springConfig
-  );
-  const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [15, 0]),
-    springConfig
-  );
-  const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [0.09, 1]),
-    springConfig
-  );
-  const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [20, 0]),
-    springConfig
-  );
-  const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [-500, 200]),
-    springConfig
-  );
+export const HeroParallax = () => {
   return (
-    <div
-      ref={ref}
-      className="h-[200vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
-    >
-      <Header />
-      <motion.div
-        style={{
-          rotateX,
-          rotateZ,
-          translateY,
-          opacity,
-        }}
-        className=""
-      >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
-          {firstRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateX}
-              key={product.title}
-            />
-          ))}
-        </motion.div>
-        <motion.div className="flex flex-row mb-20 space-x-20">
-          {secondRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateXReverse}
-              key={product.title}
-            />
-          ))}
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
+    <section className="relative min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-300 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10"></div>
 
-export const Header = () => {
-  return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0 z-50">
-      <h1 className="text-4xl md:text-6xl font-Semibold text-gray-700 drop-shadow-lg font-taskor">
-        Bridging Ideas with Technology <br />
-        <h2 className="py-2 text-primary font-taskor"> Offshore Development</h2>
-      </h1>
+      {/* Main container */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-32 lg:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh] lg:min-h-[70vh]">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Main Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight font-taskor">
+                Bridging Ideas with{" "}
+                <span className="text-primary">Technology</span>
+                <br />
+              </h1>
+            </motion.div>
 
-      <p className="max-w-2xl mb-6 text-base md:text-2xl font-semibold mt-8 text-gray-800">
-        We help startups and enterprises scale faster through embedded tech
-        talent, automation, and no-code solutions.
-      </p>
-      <NavLink to="/contact" className="relative z-50">
-        <Button
-          size="lg"
-          className="group bg-primary hover:from-primary/80 hover:to-primary/90 shadow-lg hover:shadow-primary/30 cursor-pointer hover:cursor-pointer relative z-50"
-        >
-          Get Free Consultation
-          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-        </Button>
-      </NavLink>
-    </div>
-  );
-};
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed"
+            >
+              We help startups and enterprises scale faster through embedded
+              tech talent, cutting-edge development, and innovative automation
+              solutions. Your success is our mission.
+            </motion.p>
 
-export const ProductCard = ({
-  product,
-  translate,
-}: {
-  product: {
-    title: string;
-    thumbnail: string;
-  };
-  translate: MotionValue<number>;
-}) => {
-  return (
-    <motion.div
-      style={{
-        x: translate,
-      }}
-      whileHover={{
-        y: -20,
-      }}
-      key={product.title}
-      className="group/product h-96 w-[30rem] relative shrink-0"
-    >
-      <div className="block group-hover/product:shadow-2xl">
-        <img
-          src={product.thumbnail}
-          height="400"
-          width="400"
-          className="object-cover object-left-top absolute h-full w-full inset-0"
-          alt={product.title}
-        />
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+            >
+              <NavLink to="/contact">
+                <Button
+                  size="lg"
+                  className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
+                >
+                  Get Free Consultation
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </NavLink>
+
+              <NavLink to="/projects">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="group border-2 border-gray-300 hover:border-primary hover:text-primary transition-all duration-200"
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  View Our Work
+                </Button>
+              </NavLink>
+            </motion.div>
+          </motion.div>
+
+          {/* Right SVG */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative flex items-center justify-center"
+          >
+            <div className="relative">
+              {/* Background decoration */}
+              <div className="absolute -top-4 -right-4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl"></div>
+
+              {/* Main SVG */}
+              {/* <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative z-10"
+              >
+                <img
+                  src="/home/pairprograming.svg"
+                  alt="Pair Programming Illustration"
+                  className="w-full max-w-lg h-auto drop-shadow-lg"
+                />
+              </motion.div> */}
+
+              {/* <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+                className="absolute bottom-10 -right-6 w-16 h-16 bg-gradient-to-br from-blue-500/20 to-blue-500/10 rounded-xl flex items-center justify-center"
+              >
+                <Play className="w-6 h-6 text-blue-500" />
+              </motion.div> */}
+            </div>
+          </motion.div>
+        </div>
       </div>
-      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
-      <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
-        {product.title}
-      </h2>
-    </motion.div>
+    </section>
   );
 };

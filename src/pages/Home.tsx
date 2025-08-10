@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { HeroParallax } from "@/components/Home/hero-parallax";
 import { WhoWeAre } from "@/components/Home/WhoWeAre";
 import { ServicesSnapshot } from "@/components/Home/ServicesSnapshot";
-import { WhyChooseUs } from "@/components/Home/WhyChooseUs";
 // import { CaseStudiesMetrics } from "@/components/Home/CaseStudiesMetrics";
 import Testimonials from "@/components/Home/Testimonials";
 
@@ -70,7 +69,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <HeroParallax products={products} />
+      <HeroParallax />
 
       {/* Who We Are Section */}
       <WhoWeAre />
@@ -78,14 +77,11 @@ export default function Home() {
       {/* Services Snapshot */}
       <ServicesSnapshot />
 
-      {/* Why Choose Us / Benefits */}
-      <WhyChooseUs />
-
       {/* Case Studies & Success Metrics */}
       {/* <CaseStudiesMetrics /> */}
 
       {/* Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> */}
     </div>
   );
 }
